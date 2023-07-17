@@ -14,6 +14,15 @@ hostname = ""
 
 
 def find_user_data():
+    if sys.platform != 'darwin':
+        if len(sys.argv) > 1:
+            return sys.argv[1]
+        else :
+            print("Hi, this script is only fully supported on macOS at the moment. You'll need to pass the folder your desktop environment mounted the drive to as an argument.")
+            print("EG: sudo python3 tailgraft.py \"/run/media/1000/system-boot\"")
+            print("If you know how to fix this, contributions are welcome!")
+            sys.exit(2)
+
     for root, dirs, files in os.walk('/Volumes'):
         for dir in dirs:
             if os.path.isfile(os.path.join(root, dir, 'user-data')):
