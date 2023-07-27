@@ -4,7 +4,7 @@ Graft Tailscale onto your Raspberry Pi's SD card and join it to your tailnet aut
 
 ## Usage
 
-This script is designed to be run after you've flashed an operating system onto an SD card but before you've booted it in a Raspberry Pi for the first time. It assumes you are using Linux, macOS, or Windows and have `python3` installed but otherwise has no external dependencies.
+This script is designed to be run after you've flashed an operating system onto an SD card but before you've booted it in a Raspberry Pi for the first time. It assumes you are using Linux or macOS and have `python3` installed but otherwise has no external dependencies.
 
 1. Clone this repository or download the `tailgraft.py` script.
 1. Once the operating system is flashed, run the script with `sudo python3 tailgraft.py`.
