@@ -27,13 +27,15 @@ def find_user_data():
         devices = lsblk_linux()['blockdevices']
 
         for dev in devices:
-            if dev["mountpoint"] is not None and os.path.isfile(os.path.join(dev["mountpoint"], 'user-data')):
-                return os.path.join(dev["mountpoint"], 'user-data')
-
-            if dev["children"] is not None:
+            for mountpoint in dev["mountpoints"]:
+                if mountpoint is not None and os.path.isfile(os.path.join(mountpoint, 'user-data')):
+                    return os.path.join(mountpoint, 'user-data')
+    
+            if dev.get("children", None) is not None:
                 for child in dev["children"]:
-                    if child["mountpoint"] is not None and os.path.isfile(os.path.join(child["mountpoint"], 'user-data')):
-                        return os.path.join(child["mountpoint"], 'user-data')
+                    for mountpoint in child["mountpoints"]:
+                        if mountpoint is not None and os.path.isfile(os.path.join(mountpoint, 'user-data')):
+                            return os.path.join(mountpoint, 'user-data')
 
     for root, dirs, files in os.walk('/Volumes'):
         for dir in dirs:
